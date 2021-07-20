@@ -19,7 +19,7 @@ const getData = async (url, param) => {
     const param = {
         method: 'GET',
         headers: {
-            'Authorization': RTOKEN
+            'Authorization': process.env.RTOKEN
         }
     };
 
@@ -27,7 +27,7 @@ const getData = async (url, param) => {
     const applianceData = await getData(applianceUrl, param);
     
     const body = {
-        'app': APPID,
+        'app': process.env.APPID,
         'record': {
             'temp': {
                 'value': deviceData[0].newest_events.te.val 
@@ -47,10 +47,10 @@ const getData = async (url, param) => {
         }
     };
   
-    const resp = await fetch(KINTONEURL, {
+    const resp = await fetch(process.env.KINTONEURL, {
         method: 'POST',
         headers: {
-            'X-Cybozu-API-Token': KTOKEN,
+            'X-Cybozu-API-Token': process.env.KTOKEN,
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(body)
