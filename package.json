@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "form-data": "^4.0.0",
+    "node-fetch": "^2.6.1"
+  },
+  "name": "20210714-nature-remo",
+  "version": "1.0.0",
+  "main": "remokintone.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charolittle/remokintone.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/charolittle/remokintone/issues"
+  },
+  "homepage": "https://github.com/charolittle/remokintone#readme",
+  "description": ""
+}
