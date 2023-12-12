@@ -38,8 +38,7 @@ jobs:
     - name: Create Release Pull Request
       run: |
         gh pr create \
-          -B master \
-          -t "${branch_name}のリリースノート作成" \
-          -a ${{ github.actor }}  \
+          --base master \
+          --title "${branch_name}のリリースノート作成"
 
 
