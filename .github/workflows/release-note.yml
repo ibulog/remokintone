@@ -22,25 +22,24 @@ jobs:
     - name: Create Branch
       run: |
         tomorrow=$(date '+%Y-%m-%d' --date '1 day')
-        echo "tomorrow=$tomorrow" >> $GITHUB_ENV
-        branch_name="hanica_$today"
+        echo "tomorrow=${tomorrow}" >> $GITHUB_ENV
+        branch_name="hanica_${today}"
         echo "branch_name=$branch_name" >> $GITHUB_ENV
-        git switch -c $branch_name
+        git switch -c ${branch_name}
 
     - name: Install Dependencies and Run Yarn
       run: |
         yarn install
         touch test
         git add .
-        git commit -m "$branch_nameのリリースノート作成"
-        git push origin $branch_name
+        git commit -m "${branch_name}のリリースノート作成"
+        git push origin ${branch_name}
 
     - name: Create Release Pull Request
-      if: ${{ steps.check_pr.outputs.count == 0 }}
       run: |
         gh pr create \
           -B master \
-          -t "$branch_nameのリリースノート作成" \
+          -t "${branch_name}のリリースノート作成" \
           -a ${{ github.actor }}  \
 
 
