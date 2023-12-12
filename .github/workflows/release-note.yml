@@ -23,7 +23,7 @@ jobs:
       run: |
         tomorrow=$(date '+%Y-%m-%d' --date '1 day')
         echo "tomorrow=${tomorrow}" >> $GITHUB_ENV
-        branch_name="hanica_${today}"
+        branch_name="hanica_${tomorrow}"
         echo "branch_name=$branch_name" >> $GITHUB_ENV
         git switch -c ${branch_name}
 
