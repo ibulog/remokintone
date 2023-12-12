@@ -39,7 +39,7 @@ jobs:
       if: ${{ steps.check_pr.outputs.count == 0 }}
       run: |
         gh pr create \
-          -B main \
+          -B master \
           -t "$branch_nameのリリースノート作成" \
           -a ${{ github.actor }}  \
 
