@@ -30,7 +30,7 @@ jobs:
     - name: Install Dependencies and Run Yarn
       run: |
         yarn install
-        yarn run new-release-note --product smarthr --date $tomorrow
+        touch test
         git add .
         git commit -m "$branch_nameのリリースノート作成"
         git push origin $branch_name
