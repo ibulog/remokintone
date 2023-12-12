@@ -3,6 +3,9 @@ name: リリースノートPR作成
 on:
   workflow_dispatch:
 
+permissions:
+  pull-requests: write
+
 jobs:
   create-branch-and-pr:
     runs-on: ubuntu-latest
