@@ -1,0 +1,43 @@
+name: リリースノートPR作成
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create-branch-and-pr:
+    runs-on: ubuntu-latest
+
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Set up Git
+      run: |
+        git config user.name "GitHub Actions"
+        git config user.email "actions@github.com"
+
+    - name: Create Branch
+      id: create_branch
+      run: |
+        today=$(date '+%Y-%m-%d' --date '1 day')
+        branch_name="hanica_$today"
+        git checkout -b $branch_name
+        git push origin $branch_name
+
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v5
+      with:
+        title: "$(date '+%Y-%m-%d' --date '1 day')のリリースノート"
+        branch: ${{ steps.create_branch.outputs.branch }}
+        base: "main"
+
+    - name: Install Dependencies and Run Yarn
+      run: |
+        yarn install
+        yarn run new-release-note --product smarthr --date $(date '+%Y-%m-%d' --date '1 day')
+        git add .
+        git commit -m "$(date '+%Y-%m-%d' --date '1 day')のリリースノート作成"
+        git push origin ${{ steps.create_branch.outputs.branch }}
