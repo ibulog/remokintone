@@ -25,7 +25,7 @@ jobs:
       run: echo "next_day_date=$(date +%u)" >> $GITHUB_OUTPUT
 
     - name: Set Branch Variable for Friday
-      if: ${{ steps.is_today_friday.outputs.next_day_date }} == 5
+      if: ${{ steps.is_today_friday.outputs.next_day_date }} == 3
       run: |
         next_day_date=$(date '+%Y-%m-%d' --date '3 day')
         echo "next_day_date=${next_day_date}" >> $GITHUB_ENV
@@ -33,7 +33,7 @@ jobs:
         echo "branch_name=$branch_name" >> $GITHUB_ENV
 
     - name: Set Branch Variable
-      if: ${{ steps.is_today_friday.outputs.next_day_date }} != 5
+      if: ${{ steps.is_today_friday.outputs.next_day_date }} != 3
       run: |
         next_day_date=$(date '+%Y-%m-%d' --date '1 day')
         echo "next_day_date=${next_day_date}" >> $GITHUB_ENV
