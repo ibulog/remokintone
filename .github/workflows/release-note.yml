@@ -33,7 +33,7 @@ jobs:
         echo "branch_name=$branch_name" >> $GITHUB_ENV
 
     - name: Set Branch Variable
-      if: steps.today_day.outputs.next_day_day != 3
+      if: steps.today_day.outputs.today_day != 3
       run: |
         next_day_date=$(date '+%Y-%m-%d' --date '1 day')
         echo "next_day_date=${next_day_date}" >> $GITHUB_ENV
