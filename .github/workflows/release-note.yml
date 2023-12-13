@@ -11,13 +11,13 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
     - name: Set up Git
       run: |
         git config user.name "ibulog"
         git config user.email "ibulog76@gmail.com"
-
-    - name: Checkout Repository
-      uses: actions/checkout@v3
 
     - name: Create Branch
       run: |
