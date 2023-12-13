@@ -18,13 +18,30 @@ jobs:
       run: |
         git config user.name "ibulog"
         git config user.email "ibulog76@gmail.com"
+    
+    - name: Is today Friday
+      id: is_today_friday
+      continue-on-error: true
+      run: $(date +%u)===5
 
+    - name: Set Branch Variable for Friday
+      if: steps.is_today_friday.outcome == "success"
+      run: |
+        next_day_date=$(date '+%Y-%m-%d' --date '3 day')
+        echo "next_day_date=${next_day_date}" >> $GITHUB_ENV
+        branch_name="hanica_${next_day_date}"
+        echo "branch_name=$branch_name" >> $GITHUB_ENV
+
+    - name: Set Branch Variable
+      if: steps.is_today_friday.outcome == "fail"
+      run: |
+        next_day_date=$(date '+%Y-%m-%d' --date '1 day')
+        echo "next_day_date=${next_day_date}" >> $GITHUB_ENV
+        branch_name="hanica_${next_day_date}"
+        echo "branch_name=$branch_name" >> $GITHUB_ENV
+        
     - name: Create Branch
       run: |
-        tomorrow=$(date '+%Y-%m-%d' --date '1 day')
-        echo "tomorrow=${tomorrow}" >> $GITHUB_ENV
-        branch_name="hanica_${tomorrow}"
-        echo "branch_name=$branch_name" >> $GITHUB_ENV
         git switch -c ${branch_name}
 
     - name: Install Dependencies and Run Yarn
