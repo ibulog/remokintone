@@ -19,15 +19,13 @@ jobs:
         git config user.name "ibulog"
         git config user.email "ibulog76@gmail.com"
     
-    - name: Is today Friday
-      id: is_today_friday
+    - name: Set Today Day
+      id: today_day
       continue-on-error: true
-      run: |
-        today_day=$(date +%u)
-        echo "is_today_friday=$(test $today_day -eq 3)" >> $GITHUB_OUTPUT
+      run: echo $(date +%u) >> $GITHUB_OUTPUT
 
     - name: Set Branch Variable for Friday
-      if: steps.is_today_friday.outputs.next_day_date == true 
+      if: steps.is_today_friday.outputs.today_date == 3
       run: |
         next_day_date=$(date '+%Y-%m-%d' --date '3 day')
         echo "next_day_date=${next_day_date}" >> $GITHUB_ENV
@@ -35,7 +33,7 @@ jobs:
         echo "branch_name=$branch_name" >> $GITHUB_ENV
 
     - name: Set Branch Variable
-      if: steps.is_today_friday.outputs.next_day_date == false
+      if: steps.is_today_friday.outputs.next_day_date != 3
       run: |
         next_day_date=$(date '+%Y-%m-%d' --date '1 day')
         echo "next_day_date=${next_day_date}" >> $GITHUB_ENV
