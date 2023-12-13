@@ -22,7 +22,9 @@ jobs:
     - name: Is today Friday
       id: is_today_friday
       continue-on-error: true
-      run: echo "is_today_friday=[ $(date +%u) -eq 3 ]" >> $GITHUB_OUTPUT
+      run: |
+        today_day=$(date +%u)
+        echo "is_today_friday=$(test $today_day -eq 3)" >> $GITHUB_OUTPUT
 
     - name: Set Branch Variable for Friday
       if: steps.is_today_friday.outputs.next_day_date == true 
