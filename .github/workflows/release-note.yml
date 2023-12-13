@@ -14,11 +14,6 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v3
 
-    - name: Set up Git
-      run: |
-        git config user.name "GitHub Actions"
-        git config user.email "actions@github.com"
-
     - name: Create Branch
       run: |
         tomorrow=$(date '+%Y-%m-%d' --date '1 day')
